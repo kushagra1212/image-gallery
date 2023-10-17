@@ -1,0 +1,72 @@
+.search_bar {
+  background-color: white;
+  width: 80%;
+  align-self: center;
+  display: flex;
+  justify-content: space-around;
+  height: 3em;
+  align-items: center;
+  border-radius: 0.5em;
+}
+.search_icon {
+  font-size: large;
+  color: gray;
+  cursor: pointer;
+}
+.search_input {
+  height: 80%;
+  width: 75%;
+  background-color: white;
+  border: 1px solid white;
+  outline-style: none;
+  color: black;
+}
+.reset_query {
+  background-color: white;
+  color: black;
+  border: none;
+  outline-style: none;
+  cursor: pointer;
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
+  .search_input {
+    width: 80%;
+    font-size: 1.1em;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .search_input {
+    width: 90%;
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .search_input {
+    width: 90%;
+    font-size: 1.2em;
+  }
+  .search_icon {
+    font-size: 1.5em;
+    color: gray;
+  }
+  .search_bar {
+    height: 4em;
+  }
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .search_input {
+    width: 90%;
+    font-size: 1.3em;
+  }
+  .search_icon {
+    font-size: 1.5em;
+    color: gray;
+  }
+  .search_bar {
+    height: 4em;
+  }
+}

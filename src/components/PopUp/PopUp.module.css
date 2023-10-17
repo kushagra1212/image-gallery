@@ -1,0 +1,37 @@
+.popup {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  position: fixed;
+  z-index: 10;
+  top: 0em;
+  border-radius: 0.5em;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.close_modal_icon {
+  font-size: 2em;
+  width: 1em;
+  color: rgb(109, 109, 109);
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  padding: 0.2em;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.392);
+  background-color: white;
+  opacity: 0.8;
+}
