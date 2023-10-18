@@ -8,6 +8,7 @@ type SearchProps = {
 
 export const Search: React.FC<SearchProps> = memo(({ children }) => {
   const isDarkMode = useContext(ThemeContext).currentThemeType === 'dark';
+
   return (
     <div className={styles.search_container}>
       <div className={`${styles.search_backdrop} ${!isDarkMode ? styles.light : ''}`}></div>

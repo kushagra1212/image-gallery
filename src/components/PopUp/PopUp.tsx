@@ -1,7 +1,7 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './PopUp.module.css';
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 import { ThemeContext } from '../../Context/ThemeProvider';
 type PopUpProps = {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ type PopUpProps = {
   open: boolean;
 };
 
-const PopUp: React.FC<PopUpProps> = ({ children, title, onClose, open }) => {
+const PopUp: React.FC<PopUpProps> = memo(({ children, title, onClose, open }) => {
   const isDarkTheme = useContext(ThemeContext).currentThemeType === 'dark';
 
   if (!open) return null;
@@ -31,6 +31,6 @@ const PopUp: React.FC<PopUpProps> = ({ children, title, onClose, open }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PopUp;

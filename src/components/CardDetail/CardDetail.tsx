@@ -1,19 +1,37 @@
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './CardDetail.module.css';
 import { faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import ConditionalComponent from '../ConditionalComponent/ConditionalComponent';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { getHumanReadableNumber } from '../../utils/utils-gen';
 import { ThemeContext } from '../../Context/ThemeProvider';
-import { useContext } from 'react';
+
+import styles from './CardDetail.module.css';
+import ConditionalComponent from '../ConditionalComponent/ConditionalComponent';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 type CardDetailProps = {
   card: ICard | null | undefined;
 };
 
 const CardDetail: React.FC<CardDetailProps> = ({ card }) => {
-  const isDarkTheme = useContext(ThemeContext).currentThemeType === 'dark';
+  const themeContext = useContext(ThemeContext);
+  const isDarkTheme = themeContext.currentThemeType === 'dark';
 
   if (!card) return null;
+
+  const renderSocialLink = (username: string, icon: IconProp, linkText: string, color: string) => (
+    <ConditionalComponent show={username}>
+      <div className={styles.card_detail_middle_section_social}>
+        <div className={styles.card_detail_middle_section_social_icon}>
+          <FontAwesomeIcon icon={icon} color={color} />
+        </div>
+        <a style={{ color }} target="_blank" href={`https://www.${linkText}.com/${username}`}>
+          @{username}
+        </a>
+      </div>
+    </ConditionalComponent>
+  );
+
   return (
     <div className={`${styles.card_detail} ${isDarkTheme ? styles.dark : ''}`}>
       <div className={styles.card_detail_image} style={{ aspectRatio: card.width / card.height }}>
@@ -37,22 +55,8 @@ const CardDetail: React.FC<CardDetailProps> = ({ card }) => {
           </a>
         </div>
         <div className={styles.card_detail_middle_section}>
-          <ConditionalComponent show={card.user.instagram_username}>
-            <div className={styles.card_detail_middle_section_social}>
-              <div className={styles.card_detail_middle_section_social_icon}>
-                <FontAwesomeIcon icon={faInstagram} color="red" />
-              </div>
-              <p>{card.user.instagram_username}</p>
-            </div>
-          </ConditionalComponent>
-          <ConditionalComponent show={card.user.twitter_username}>
-            <div className={styles.card_detail_middle_section_social}>
-              <div className={styles.card_detail_middle_section_social_icon}>
-                <FontAwesomeIcon icon={faTwitter} color="blue" />
-              </div>
-              <p>{card.user.twitter_username}</p>
-            </div>
-          </ConditionalComponent>
+          {renderSocialLink(card.user.instagram_username, faInstagram, 'instagram', isDarkTheme ? 'red' : 'red')}
+          {renderSocialLink(card.user.twitter_username, faTwitter, 'twitter', isDarkTheme ? 'lightblue' : 'blue')}
           <div className={styles.card_detail_middle_section_social}>
             <FontAwesomeIcon
               icon={faHeart}

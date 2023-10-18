@@ -10,5 +10,7 @@ export const themes = {
     color: 'white',
   },
   currentThemeType: 'light',
-  changeCurrentTheme: (newTheme: ThemeType) => {},
+  changeCurrentTheme: (newTheme: ThemeType) => {
+    themes.currentThemeType = newTheme;
+  },
 };

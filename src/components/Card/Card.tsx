@@ -3,7 +3,7 @@ import styles from './Card.module.css';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { getHumanReadableNumber } from '../../utils/utils-gen';
 import { ThemeContext } from '../../Context/ThemeProvider';
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 interface CardProps {
   card: ICard;
   toggleModalHandler: (id: string) => void;
@@ -15,8 +15,9 @@ interface CardProps {
  * @param {Function} toggleModalHandler - The function to toggle the modal on click.
  * @returns {JSX.Element} - The JSX element of the card component.
  */
-export function Card({ card, toggleModalHandler }: CardProps): JSX.Element {
+const Card = memo(({ card, toggleModalHandler }: CardProps): JSX.Element => {
   const isDarkTheme = useContext(ThemeContext).currentThemeType === 'dark';
+
   return (
     <div
       className={`${styles.card} ${isDarkTheme ? styles.dark : ''}`}
@@ -39,4 +40,6 @@ export function Card({ card, toggleModalHandler }: CardProps): JSX.Element {
       </div>
     </div>
   );
-}
+});
+
+export default Card;

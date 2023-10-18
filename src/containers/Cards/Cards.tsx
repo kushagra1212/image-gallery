@@ -1,11 +1,11 @@
 import { memo, useContext, useEffect, useMemo, useState } from 'react';
-import { Card } from '../../components/Card/Card';
 import styles from './Cards.module.css';
-import { GetPhotosResult, fetchPhotos, searchPhotos } from '../../API/posts';
 import { LoadingSpinner } from '../../components/Animation/LoadingSpinner';
 import PopUp from '../../components/PopUp/PopUp';
 import CardDetail from '../../components/CardDetail/CardDetail';
 import { ThemeContext } from '../../Context/ThemeProvider';
+import Card from '../../components/Card/Card';
+import apiService from '../../API/posts';
 
 interface CardsProps {
   page: number;
@@ -16,7 +16,7 @@ interface CardsProps {
 const Cards: React.FC<CardsProps> = memo(({ page, handleChangePage, query }) => {
   const [cards, setCards] = useState<ICard[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [hasReachedEnd, setHasReachedEnd] = useState<boolean>(false);
@@ -28,9 +28,13 @@ const Cards: React.FC<CardsProps> = memo(({ page, handleChangePage, query }) => 
    * @returns Promise that resolves when the photos have been fetched and updated in state.
    */
   const getCards = async (): Promise<void> => {
+    setError(null);
     setLoading(true);
     try {
-      const result: GetPhotosResult = query !== '' ? await searchPhotos(query, page) : await fetchPhotos(page);
+      const result: GetPhotosResult =
+        query !== '' ? await apiService.searchPhotos(query, page) : await apiService.fetchPhotos(page);
+
+      console.log(result);
 
       if (result?.cards) {
         setCards((prev) => {
@@ -76,7 +80,7 @@ const Cards: React.FC<CardsProps> = memo(({ page, handleChangePage, query }) => 
   useEffect(() => {
     let isMounted = true;
 
-    if (isMounted && !loading) {
+    if (isMounted) {
       getCards();
     }
 
@@ -111,16 +115,20 @@ const Cards: React.FC<CardsProps> = memo(({ page, handleChangePage, query }) => 
   /**
    * Renders the component. Simple Error Message For Now.
    */
-  if (error) {
-    return <p>{error}</p>;
+  if (error && !loading) {
+    return <p className={`${styles.error} ${isDarkMode ? styles.dark : ''}`}>{error}</p>;
   }
 
   return (
     <div className={`${styles.cards_container} ${isDarkMode ? styles.dark : ''}`}>
       {loading && <LoadingSpinner />}
+
+      {/* PopUP Modal */}
       <PopUp open={openModal} onClose={toggleModalHandler}>
         <CardDetail card={selectedCard} />
       </PopUp>
+
+      {/* Cards */}
       <div className={`${styles.cards} ${isDarkMode ? styles.dark : ''}`} id="cards">
         {cards && cards.length > 0 ? (
           cards.map((card) => <Card toggleModalHandler={toggleModalHandler} key={card.id} card={card} />)
@@ -132,4 +140,4 @@ const Cards: React.FC<CardsProps> = memo(({ page, handleChangePage, query }) => 
   );
 });
 
-export { Cards };
+export default Cards;

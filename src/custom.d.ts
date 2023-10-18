@@ -180,3 +180,17 @@ interface IHandleExceptionsProps {
   width: number;
   height: number;
 }
+type GetPhotosResult = {
+  cards: ICard[];
+};
+
+type GetPhotsSearchResult = {
+  results: ICard[];
+  total_pages: number;
+  total: number;
+};
+type FetchOptions = {
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  headers?: HeadersInit;
+  body?: string | FormData | URLSearchParams | ReadableStream<Uint8Array> | null;
+};

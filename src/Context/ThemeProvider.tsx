@@ -11,14 +11,13 @@ const getThemeFromLocalStorage = (): ThemeType => {
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<ThemeType>(getThemeFromLocalStorage());
-
-  const changeCurrentTheme = (newTheme: ThemeType) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+  const changeCurrentTheme = (theme: ThemeType) => {
+    localStorage.setItem('theme', theme);
+    setTheme(theme);
   };
 
   return (
-    <ThemeContext.Provider value={{ ...themes, currentThemeType: theme, changeCurrentTheme: changeCurrentTheme }}>
+    <ThemeContext.Provider value={{ ...themes, currentThemeType: theme, changeCurrentTheme }}>
       {children}
     </ThemeContext.Provider>
   );

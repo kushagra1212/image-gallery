@@ -1,37 +1,21 @@
-export const BASE_URL = 'http://localhost:8000';
+import { fetchWithAuthorization } from './Authorization';
 
-export type GetPhotosResult = {
-  cards: ICard[];
-};
-
-export type GetPhotsSearchResult = {
-  results: ICard[];
-  total_pages: number;
-  total: number;
-};
-
-export const fetchPhotos = async (page: number): Promise<GetPhotosResult> => {
-  try {
-    const response = await fetch(`${BASE_URL}/photos?page=${page}`);
-    const data = (await response.json()) as ICard[];
+const apiService = {
+  fetchPhotos: async (page: number): Promise<{ cards: ICard[] }> => {
+    const url = `/photos?page=${page}`;
+    const data = await fetchWithAuthorization<ICard[]>(url);
     return {
       cards: data,
     };
-  } catch (error) {
-    console.error(error);
-    throw new Error('There was an error while trying to get the photos. Please try again later.');
-  }
-};
+  },
 
-export const searchPhotos = async (query: string, page: number): Promise<GetPhotosResult> => {
-  try {
-    const response = await fetch(`${BASE_URL}/search/photos?page=${page}&query=${query}`);
-    const data = (await response.json()) as GetPhotsSearchResult;
+  searchPhotos: async (query: string, page: number): Promise<{ cards: ICard[] }> => {
+    const url = `/search/photos?page=${page}&query=${query}`;
+    const data = await fetchWithAuthorization<{ results: ICard[] }>(url);
     return {
       cards: data.results,
     };
-  } catch (error) {
-    console.error(error);
-    throw new Error('There was an error while trying to get the photos. Please try again later.');
-  }
+  },
 };
+
+export default apiService;

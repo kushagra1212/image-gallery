@@ -11,6 +11,7 @@ interface ResponsiveProps {
 
 const Responsive: React.FC<ResponsiveProps> = ({ displayIn, children }) => {
   const [state, setState] = React.useState(initialState);
+
   React.useEffect(() => {
     const handleResize = () => {
       const { width, height } = getWindowDimension();
@@ -21,6 +22,7 @@ const Responsive: React.FC<ResponsiveProps> = ({ displayIn, children }) => {
       window.removeEventListener('resize', handleResize, false);
     };
   }, []);
+
   const shouldRender = (display: DisplayIn[], width: number, height: number) => {
     if (display.indexOf('Laptop') !== -1 && width >= IdDeviceBreakpointsByWidth.laptop_min) {
       return true;

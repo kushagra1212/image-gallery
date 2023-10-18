@@ -13,7 +13,7 @@ const ToggleThemeButton: React.FC = memo(() => {
     <div className={`${styles.toggle_theme} ${isDarkMode ? styles.dark : ''}`} onClick={toggleTheme}>
       <div
         className={styles.slider}
-        style={isDarkMode ? { transform: 'translateX(0)' } : { transform: 'translateX(28px)' }}
+        style={isDarkMode ? { transform: 'translateX(0)' } : { transform: 'translateX(26px)' }}
       ></div>
     </div>
   );

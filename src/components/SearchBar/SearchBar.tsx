@@ -11,15 +11,16 @@ type SearchProps = {
 };
 
 export const SearchBar: React.FC<SearchProps> = memo(({ query, handleChangeQuery, handleResetQuery }) => {
-  const [serachQuery, setSearchQuery] = useState<string>(query);
-  const throttleHandleChangeQuery = useCallback(throttle(handleChangeQuery, 520), []);
+  const [searchQuery, setSearchQuery] = useState<string>(query);
+  const throttleHandleChangeQuery = useCallback(throttle(handleChangeQuery, 1020), []);
   const isDarkMode = useContext(ThemeContext).currentThemeType === 'dark';
-  console.log(isDarkMode);
+
   useEffect(() => {
     return () => {
       throttleHandleChangeQuery.cancel();
     };
   }, []);
+
   return (
     <div className={`${styles.search_bar} ${isDarkMode ? styles.dark : ''}`}>
       <FontAwesomeIcon className={styles.search_icon} icon={faSearch} />
@@ -27,7 +28,7 @@ export const SearchBar: React.FC<SearchProps> = memo(({ query, handleChangeQuery
         className={styles.search_input}
         type="text"
         placeholder="Search high resolution images"
-        value={serachQuery}
+        value={searchQuery}
         onChange={(e) => {
           setSearchQuery(e.target.value);
           throttleHandleChangeQuery(e.target.value);
@@ -40,7 +41,7 @@ export const SearchBar: React.FC<SearchProps> = memo(({ query, handleChangeQuery
           setSearchQuery('');
         }}
         className={`${styles.reset_query} ${isDarkMode ? styles.dark : ''}`}
-        style={query ? { opacity: 1 } : { opacity: 0 }}
+        style={searchQuery ? { opacity: 1 } : { opacity: 0 }}
       />
     </div>
   );

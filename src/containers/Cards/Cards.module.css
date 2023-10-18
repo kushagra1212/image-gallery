@@ -40,6 +40,18 @@
 .cards.dark {
   background: linear-gradient(90deg, rgb(33, 4, 4) 0%, rgba(0, 0, 0, 0.9) 50%, rgba(15, 24, 33, 0.9) 100%);
 }
+
+.error {
+  color: red;
+  align-self: center;
+  text-align: center;
+  justify-self: unset;
+}
+
+.error.dark {
+  color: red;
+}
+
 @media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
   .cards {
     flex-wrap: wrap;

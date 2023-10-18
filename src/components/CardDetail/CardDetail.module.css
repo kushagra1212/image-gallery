@@ -2,10 +2,11 @@
   width: 100%;
   color: black;
   overflow: scroll;
+  overflow-x: hidden;
   display: flex;
   height: 100vh;
   flex-direction: column;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   background-color: linear-gradient(
     90deg,
     rgb(193, 204, 255) 0%,
@@ -38,6 +39,7 @@
   width: 100%;
   padding: 0.1em;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .card_detail_top_section {
@@ -150,7 +152,7 @@
 }
 
 .card_detail_bottom_section_description h3 {
-  color: gray;
+  color: rgb(105, 104, 104);
   font-weight: bolder;
 }
 .card_detail_bottom_section_description.dark h3 {
