@@ -12,7 +12,7 @@ type SearchProps = {
 
 export const SearchBar: React.FC<SearchProps> = memo(({ query, handleChangeQuery, handleResetQuery }) => {
   const [searchQuery, setSearchQuery] = useState<string>(query);
-  const throttleHandleChangeQuery = useCallback(throttle(handleChangeQuery, 1020), []);
+  const throttleHandleChangeQuery = useCallback(throttle(handleChangeQuery, 520), []);
   const isDarkMode = useContext(ThemeContext).currentThemeType === 'dark';
 
   useEffect(() => {

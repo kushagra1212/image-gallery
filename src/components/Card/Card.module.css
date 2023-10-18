@@ -13,7 +13,7 @@
   box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.1);
   align-self: center;
   margin: 0em;
-  width: 90%;
+  width: auto;
   font-size: 1.1em;
   margin-top: 1em;
   cursor: pointer;
@@ -45,11 +45,11 @@
   transition: all 0.5s ease-in-out;
 }
 
-.card:hover .card_info {
+.card:hover {
   background-color: #f2f2f2;
 }
 
-.card.dark:hover .card_info {
+.card.dark:hover {
   background-color: #222222;
 }
 
@@ -80,8 +80,9 @@
 .card_info {
   display: flex;
   width: 100%;
-  padding-top: 0.5em;
-  padding-right: 0.6em;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 .user_info {
   display: flex;
@@ -153,7 +154,7 @@
   .card {
     margin: 1em;
     margin-top: 2em;
-    width: 20%;
+    width: auto;
   }
   .user_info {
     font-size: 0.7em;
@@ -163,7 +164,7 @@
   .card {
     margin: 1em;
     margin-top: 2em;
-    width: 20%;
+    width: auto;
   }
   .user_info {
     font-size: 0.8em;

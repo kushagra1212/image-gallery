@@ -19,11 +19,7 @@ const Card = memo(({ card, toggleModalHandler }: CardProps): JSX.Element => {
   const isDarkTheme = useContext(ThemeContext).currentThemeType === 'dark';
 
   return (
-    <div
-      className={`${styles.card} ${isDarkTheme ? styles.dark : ''}`}
-      style={{ aspectRatio: card.width / card.height }}
-      onClick={() => toggleModalHandler(card.id)}
-    >
+    <div className={`${styles.card} ${isDarkTheme ? styles.dark : ''}`} onClick={() => toggleModalHandler(card.id)}>
       <img className={styles.thumbnail} src={card.urls.thumb} alt="Thumbnail" />
       <div className={styles.card_info}>
         <div className={styles.user_info}>
