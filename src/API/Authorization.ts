@@ -1,7 +1,5 @@
-const BASE_URL = import.meta.env.VITE_UNSPLASH_API_URL;
-const API_KEY = import.meta.env.VITE_UNSPLASH_CLIENT_ID_ACCESS_KEY;
-
-console.log('API_KEY', API_KEY, BASE_URL);
+const BASE_URL = 'https://api.unsplash.com';
+const API_KEY = '8YPjisW8XCCdg1qqPPoXVjib_u2pQzA22cKk1uY_Fcc';
 
 const headers: HeadersInit = {
   Authorization: `Client-ID ${API_KEY}`,
