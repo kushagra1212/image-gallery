@@ -3,6 +3,9 @@
 ## Description
 - Image gallery using React, TypeScript, Vite, and Unsplash API.
 
+## Demo
+- [CodeSandbox](https://codesandbox.io/p/github/kushagra1212/image-gallery/draft/intelligent-frost)
+
 ## Setup
 
 - Install dependencies 
