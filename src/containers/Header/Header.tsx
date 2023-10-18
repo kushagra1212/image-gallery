@@ -59,6 +59,7 @@ export const Header: React.FC<HeaderProps> = memo(({ children }) => {
               <FontAwesomeIcon
                 icon={faSearch}
                 color={isDarkTheme ? 'white' : 'black'}
+                className={styles.search_icon_phone}
                 onClick={() => setShowSearch(true)}
               />
               <FontAwesomeIcon

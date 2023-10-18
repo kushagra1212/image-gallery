@@ -8,13 +8,14 @@
   top: 0;
   margin-top: 0;
   width: 100vw;
-  height: 10vh;
   padding: 0%;
   z-index: 3;
   animation-name: blur;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 0s;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 .header.dark {
   background-color: #111111;
@@ -85,6 +86,10 @@
 
 .imageGallery.dark {
   color: white;
+}
+
+.search_icon_phone {
+  margin-right: auto;
 }
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
