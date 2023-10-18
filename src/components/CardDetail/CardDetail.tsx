@@ -4,15 +4,18 @@ import { faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import ConditionalComponent from '../ConditionalComponent/ConditionalComponent';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { getHumanReadableNumber } from '../../utils/utils-gen';
+import { ThemeContext } from '../../Context/ThemeProvider';
+import { useContext } from 'react';
 type CardDetailProps = {
   card: ICard | null | undefined;
 };
 
 const CardDetail: React.FC<CardDetailProps> = ({ card }) => {
-  if (!card) return null;
+  const isDarkTheme = useContext(ThemeContext).currentThemeType === 'dark';
 
+  if (!card) return null;
   return (
-    <div className={styles.card_detail}>
+    <div className={`${styles.card_detail} ${isDarkTheme ? styles.dark : ''}`}>
       <div className={styles.card_detail_image} style={{ aspectRatio: card.width / card.height }}>
         <img src={card.urls.regular} alt={card.alt_description} style={{ aspectRatio: card.width / card.height }} />
       </div>
@@ -30,7 +33,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ card }) => {
             </div>
           </div>
           <a href={card.links.download} download>
-            <button className={styles.download_button}>Download</button>
+            <button className={`${styles.download_button} ${isDarkTheme ? styles.dark : ''}`}>Download</button>
           </a>
         </div>
         <div className={styles.card_detail_middle_section}>
@@ -51,13 +54,17 @@ const CardDetail: React.FC<CardDetailProps> = ({ card }) => {
             </div>
           </ConditionalComponent>
           <div className={styles.card_detail_middle_section_social}>
-            <FontAwesomeIcon icon={faHeart} color="black" className={styles.card_detail_middle_section_social_icon} />
+            <FontAwesomeIcon
+              icon={faHeart}
+              color={isDarkTheme ? 'white' : 'black'}
+              className={styles.card_detail_middle_section_social_icon}
+            />
             <p>{getHumanReadableNumber(card.likes)}</p>
           </div>
         </div>
         <ConditionalComponent show={card.description}>
           <div className={styles.card_detail_bottom_section}>
-            <div className={styles.card_detail_bottom_section_description}>
+            <div className={`${styles.card_detail_bottom_section_description} ${isDarkTheme ? styles.dark : ''}`}>
               <h3>Description</h3>
               <p>{card.description}</p>
             </div>
@@ -66,7 +73,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ card }) => {
 
         <ConditionalComponent show={card.user.bio}>
           <div className={styles.card_detail_bottom_section}>
-            <div className={styles.card_detail_bottom_section_description}>
+            <div className={`${styles.card_detail_bottom_section_description} ${isDarkTheme ? styles.dark : ''}`}>
               <h3>Bio</h3>
               <p>{card.user.bio}</p>
             </div>

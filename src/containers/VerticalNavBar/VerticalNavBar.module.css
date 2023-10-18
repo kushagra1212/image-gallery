@@ -27,6 +27,14 @@
   }
 }
 
+.nav_bar_theme {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
 .verticalNavBar {
   width: 60vw;
   background-color: white;
@@ -75,4 +83,24 @@
 }
 .nav_bar h3 {
   cursor: pointer;
+  margin-top: 1em;
+  border-radius: 0.3em;
+  padding: 0.2em;
+}
+.dark_logo {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+.darkimg {
+  color: white;
+}
+.verticalNavBarContainer.dark {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.verticalNavBar.dark {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.verticalNavBar_nav.dark {
+  color: white;
 }

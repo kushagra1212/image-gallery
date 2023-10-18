@@ -3,8 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-content: space-between;
-  margin-top: 1em;
+  padding-top: 1em;
   width: 100%;
+  background-color: linear-gradient(
+    90deg,
+    rgb(160, 176, 248) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 207, 207, 0.9) 100%
+  );
 }
 
 .no_results {
@@ -13,7 +19,27 @@
   text-align: center;
   justify-self: unset;
 }
+.no_results.dark {
+  color: white;
+}
+.cards_container {
+  width: 100%;
+  height: auto;
+  background-color: linear-gradient(
+    90deg,
+    rgb(193, 204, 255) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 207, 207, 0.9) 100%
+  );
+}
 
+.cards_container.dark {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.cards.dark {
+  background: linear-gradient(90deg, rgb(33, 4, 4) 0%, rgba(0, 0, 0, 0.9) 50%, rgba(15, 24, 33, 0.9) 100%);
+}
 @media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
   .cards {
     flex-wrap: wrap;

@@ -1,0 +1,47 @@
+.toggle_theme {
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle_theme_light {
+  background-color: #ccc;
+}
+
+.toggle_theme_dark {
+  background-color: #333;
+}
+.slider {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+}
+
+.toggle_theme_light .slider {
+  transform: translateX(0);
+}
+
+.toggle_theme_dark .slider {
+  transform: translateX(26px);
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+}

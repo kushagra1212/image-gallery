@@ -1,35 +1,47 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './SearchBar.module.css';
 import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useCallback, useEffect } from 'react';
-import debounce from 'lodash.debounce';
-
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
+import throttle from 'lodash.throttle';
+import { ThemeContext } from '../../Context/ThemeProvider';
 type SearchProps = {
   query: string;
   handleChangeQuery: (query: string) => void;
   handleResetQuery: () => void;
 };
 
-export const SearchBar: React.FC<SearchProps> = ({ query, handleChangeQuery, handleResetQuery }) => {
-  const debouncedHandleSearchPhotos = useCallback(debounce(handleChangeQuery, 500), []);
-
+export const SearchBar: React.FC<SearchProps> = memo(({ query, handleChangeQuery, handleResetQuery }) => {
+  const [serachQuery, setSearchQuery] = useState<string>(query);
+  const throttleHandleChangeQuery = useCallback(throttle(handleChangeQuery, 520), []);
+  const isDarkMode = useContext(ThemeContext).currentThemeType === 'dark';
+  console.log(isDarkMode);
   useEffect(() => {
     return () => {
-      debouncedHandleSearchPhotos.cancel();
+      throttleHandleChangeQuery.cancel();
     };
-  });
-
+  }, []);
   return (
-    <div className={styles.search_bar}>
+    <div className={`${styles.search_bar} ${isDarkMode ? styles.dark : ''}`}>
       <FontAwesomeIcon className={styles.search_icon} icon={faSearch} />
       <input
         className={styles.search_input}
         type="text"
         placeholder="Search high resolution images"
-        value={query}
-        onChange={(e) => debouncedHandleSearchPhotos(e.target.value)}
+        value={serachQuery}
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+          throttleHandleChangeQuery(e.target.value);
+        }}
       />
-      {query && <FontAwesomeIcon icon={faClose} onClick={handleResetQuery} className={styles.reset_query} />}
+      <FontAwesomeIcon
+        icon={faClose}
+        onClick={() => {
+          handleResetQuery();
+          setSearchQuery('');
+        }}
+        className={`${styles.reset_query} ${isDarkMode ? styles.dark : ''}`}
+        style={query ? { opacity: 1 } : { opacity: 0 }}
+      />
     </div>
   );
-};
+});

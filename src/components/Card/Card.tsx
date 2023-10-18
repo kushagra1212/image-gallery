@@ -2,15 +2,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Card.module.css';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { getHumanReadableNumber } from '../../utils/utils-gen';
+import { ThemeContext } from '../../Context/ThemeProvider';
+import { useContext } from 'react';
 interface CardProps {
   card: ICard;
   toggleModalHandler: (id: string) => void;
 }
 
-export function Card({ card, toggleModalHandler }: CardProps) {
+/**
+ * Renders a card component with image, user information and likes count.
+ * @param {Object} card - The card object containing image, user and likes information.
+ * @param {Function} toggleModalHandler - The function to toggle the modal on click.
+ * @returns {JSX.Element} - The JSX element of the card component.
+ */
+export function Card({ card, toggleModalHandler }: CardProps): JSX.Element {
+  const isDarkTheme = useContext(ThemeContext).currentThemeType === 'dark';
   return (
     <div
-      className={styles.card}
+      className={`${styles.card} ${isDarkTheme ? styles.dark : ''}`}
       style={{ aspectRatio: card.width / card.height }}
       onClick={() => toggleModalHandler(card.id)}
     >
